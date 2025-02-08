@@ -1,0 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:flutterful/features/graphics/widgets/canvas_example.dart';
+
+class CanvasScreen extends StatelessWidget {
+  const CanvasScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Canvas Drawing'),
+      ),
+      body: const CanvasExample(),
+    );
+  }
+}

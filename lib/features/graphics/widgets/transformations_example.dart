@@ -9,6 +9,7 @@ class TransformationsExample extends StatefulWidget {
 }
 
 class _TransformationsExampleState extends State<TransformationsExample> {
+  var _selectedType = TransformType.translate;
   var _translateX = 0.0;
   var _translateY = 0.0;
   var _rotation = 0.0;
@@ -16,98 +17,115 @@ class _TransformationsExampleState extends State<TransformationsExample> {
   var _skewX = 0.0;
   var _skewY = 0.0;
   var _perspective = 0.0;
-  var _selectedTransform = TransformType.translate;
+  var _showCode = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Container(
-            color: Colors.blue.withOpacity(0.1),
-            padding: const EdgeInsets.all(32),
-            child: Center(
-              child: Transform(
-                transform: _buildTransformMatrix(),
-                alignment: Alignment.center,
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Icon(
-                    Icons.flutter_dash,
-                    size: 100,
-                    color: Colors.white,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: Colors.blue.withOpacity(0.1),
+              padding: const EdgeInsets.all(32),
+              child: Center(
+                child: Transform(
+                  transform: _buildTransformMatrix(),
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Icon(
+                      Icons.flutter_dash,
+                      size: 100,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(16),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Transform Type',
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 8),
-              SegmentedButton<TransformType>(
-                segments: const [
-                  ButtonSegment(
-                    value: TransformType.translate,
-                    icon: Icon(Icons.open_with),
-                    label: Text('Translate'),
-                  ),
-                  ButtonSegment(
-                    value: TransformType.rotate,
-                    icon: Icon(Icons.rotate_right),
-                    label: Text('Rotate'),
-                  ),
-                  ButtonSegment(
-                    value: TransformType.scale,
-                    icon: Icon(Icons.zoom_in),
-                    label: Text('Scale'),
-                  ),
-                  ButtonSegment(
-                    value: TransformType.skew,
-                    icon: Icon(Icons.transform),
-                    label: Text('Skew'),
-                  ),
-                  ButtonSegment(
-                    value: TransformType.perspective,
-                    icon: Icon(Icons.view_in_ar),
-                    label: Text('Perspective'),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Transform Type',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 8),
+                SegmentedButton<TransformType>(
+                  segments: const [
+                    ButtonSegment(
+                      value: TransformType.translate,
+                      icon: Icon(Icons.open_with),
+                      label: Text('Translate'),
+                    ),
+                    ButtonSegment(
+                      value: TransformType.rotate,
+                      icon: Icon(Icons.rotate_right),
+                      label: Text('Rotate'),
+                    ),
+                    ButtonSegment(
+                      value: TransformType.scale,
+                      icon: Icon(Icons.zoom_in),
+                      label: Text('Scale'),
+                    ),
+                    ButtonSegment(
+                      value: TransformType.skew,
+                      icon: Icon(Icons.transform),
+                      label: Text('Skew'),
+                    ),
+                    ButtonSegment(
+                      value: TransformType.perspective,
+                      icon: Icon(Icons.view_in_ar),
+                      label: Text('Perspective'),
+                    ),
+                  ],
+                  selected: {_selectedType},
+                  onSelectionChanged: (selected) {
+                    setState(() => _selectedType = selected.first);
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildControls(),
+                const SizedBox(height: 16),
+                FilledButton.icon(
+                  onPressed: _resetTransform,
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Reset Transform'),
+                ),
+                const SizedBox(height: 16),
+                FilledButton.icon(
+                  onPressed: () => setState(() => _showCode = !_showCode),
+                  icon: Icon(_showCode ? Icons.code_off : Icons.code),
+                  label: Text(_showCode ? 'Hide Code' : 'Show Code'),
+                ),
+                if (_showCode) ...[
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceVariant,
+                    ),
+                    child: SelectableText(
+                      _buildCode(),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontFamily: 'monospace',
+                          ),
+                    ),
                   ),
                 ],
-                selected: {_selectedTransform},
-                onSelectionChanged: (selected) {
-                  setState(() => _selectedTransform = selected.first);
-                },
-              ),
-              const SizedBox(height: 16),
-              _buildControls(),
-              const SizedBox(height: 16),
-              FilledButton.icon(
-                onPressed: _resetTransform,
-                icon: const Icon(Icons.refresh),
-                label: const Text('Reset Transform'),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -133,7 +151,7 @@ class _TransformationsExampleState extends State<TransformationsExample> {
   }
 
   Widget _buildControls() {
-    switch (_selectedTransform) {
+    switch (_selectedType) {
       case TransformType.translate:
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,6 +255,40 @@ class _TransformationsExampleState extends State<TransformationsExample> {
           ],
         );
     }
+  }
+
+  String _buildCode() {
+    final buffer = StringBuffer();
+    buffer.writeln('Transform(');
+    buffer.writeln('  transform: Matrix4.identity()');
+
+    switch (_selectedType) {
+      case TransformType.translate:
+        buffer.writeln(
+            '    ..translate(${_translateX.toStringAsFixed(1)}, ${_translateY.toStringAsFixed(1)})');
+      case TransformType.rotate:
+        buffer.writeln(
+            '    ..rotateZ(${_rotation.toStringAsFixed(1)} * pi / 180)');
+      case TransformType.scale:
+        buffer.writeln('    ..scale(${_scale.toStringAsFixed(2)})');
+      case TransformType.skew:
+        buffer.writeln('''
+    // Apply skew
+    ..setEntry(0, 1, ${_skewX.toStringAsFixed(2)})
+    ..setEntry(1, 0, ${_skewY.toStringAsFixed(2)})''');
+      case TransformType.perspective:
+        buffer.writeln('''
+    // Apply perspective
+    ..setEntry(3, 2, ${_perspective.toStringAsFixed(3)} / 1000.0)
+    ..setEntry(2, 3, -1.0)
+    ..setEntry(3, 3, ${(1.0 + _perspective / 1000.0).toStringAsFixed(3)})''');
+    }
+
+    buffer.writeln('  alignment: Alignment.center,');
+    buffer.writeln('  child: child,');
+    buffer.writeln(')');
+
+    return buffer.toString();
   }
 
   void _resetTransform() {

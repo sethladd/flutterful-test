@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterful/features/widgets/widgets_screen.dart';
-import 'package:flutterful/features/graphics/graphics_screen.dart';
+import 'package:flutterful/features/graphics/graphics_menu_screen.dart';
 import 'package:flutterful/features/colors/colors_screen.dart';
 import 'package:flutterful/features/search/search_screen.dart';
 
@@ -43,7 +43,7 @@ class HomeScreen extends StatelessWidget {
             icon: Icons.animation,
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (_) => const GraphicsScreen()),
+              MaterialPageRoute(builder: (_) => const GraphicsMenuScreen()),
             ),
           ),
           const SizedBox(height: 16),
