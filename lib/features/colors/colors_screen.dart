@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterful/features/colors/models/color_model.dart';
+import 'package:flutterful/features/graphics/widgets/source_code_view.dart';
 
 class ColorsScreen extends StatefulWidget {
   const ColorsScreen({super.key});
@@ -95,34 +96,11 @@ class _ColorsScreenState extends State<ColorsScreen> {
             ),
           ),
 
-          // Code Display
-          Container(
-            width: double.infinity,
+          // Replace existing code display with SourceCodeView
+          Padding(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceVariant,
-              border: Border(
-                top: BorderSide(
-                  color: Theme.of(context).dividerColor,
-                ),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Flutter Code',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  _colorState.toCode(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(fontFamily: 'monospace'),
-                ),
-              ],
+            child: SourceCodeView(
+              sourceCode: _colorState.toCode(),
             ),
           ),
         ],

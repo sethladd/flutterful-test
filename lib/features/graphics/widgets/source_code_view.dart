@@ -18,7 +18,7 @@ class _SourceCodeViewState extends State<SourceCodeView> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         FilledButton.icon(
           onPressed: () => setState(() => _showCode = !_showCode),
@@ -28,6 +28,7 @@ class _SourceCodeViewState extends State<SourceCodeView> {
         if (_showCode) ...[
           const SizedBox(height: 16),
           Container(
+            width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surfaceVariant,
