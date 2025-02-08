@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutterful/features/graphics/widgets/source_code_view.dart';
 
 class ClippingExample extends StatefulWidget {
   const ClippingExample({super.key});
@@ -13,103 +14,82 @@ class _ClippingExampleState extends State<ClippingExample> {
   var _radius = 16.0;
   var _waveHeight = 32.0;
   var _waveCount = 3;
-  var _showCode = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  color: Colors.blue.withOpacity(0.1),
-                  padding: const EdgeInsets.all(32),
-                  child: Center(
-                    child: ClipPath(
-                      clipper: _ShapeClipper(
-                        shape: _selectedShape,
-                        radius: _radius,
-                        waveHeight: _waveHeight,
-                        waveCount: _waveCount,
-                      ),
-                      child: Image.network(
-                        'https://picsum.photos/400',
-                        width: 300,
-                        height: 300,
-                        fit: BoxFit.cover,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    color: Colors.blue.withOpacity(0.1),
+                    padding: const EdgeInsets.all(32),
+                    child: Center(
+                      child: ClipPath(
+                        clipper: _ShapeClipper(
+                          shape: _selectedShape,
+                          radius: _radius,
+                          waveHeight: _waveHeight,
+                          waveCount: _waveCount,
+                        ),
+                        child: Image.network(
+                          'https://picsum.photos/400',
+                          width: 300,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Shape',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      const SizedBox(height: 8),
-                      SizedBox(
-                        height: 48,
-                        child: Center(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                for (final shape in ClipShape.values)
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8),
-                                    child: IconButton.filled(
-                                      isSelected: shape == _selectedShape,
-                                      icon: Icon(_getShapeIcon(shape)),
-                                      onPressed: () => setState(
-                                          () => _selectedShape = shape),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Shape',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          height: 48,
+                          child: Center(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  for (final shape in ClipShape.values)
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: IconButton.filled(
+                                        isSelected: shape == _selectedShape,
+                                        icon: Icon(_getShapeIcon(shape)),
+                                        onPressed: () => setState(
+                                            () => _selectedShape = shape),
+                                      ),
                                     ),
-                                  ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      _buildControls(),
-                      const SizedBox(height: 16),
-                      FilledButton.icon(
-                        onPressed: () => setState(() => _showCode = !_showCode),
-                        icon: Icon(_showCode ? Icons.code_off : Icons.code),
-                        label: Text(_showCode ? 'Hide Code' : 'Show Code'),
-                      ),
-                      if (_showCode) ...[
                         const SizedBox(height: 16),
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surfaceVariant,
-                          ),
-                          child: SelectableText(
-                            _buildCode(),
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                  fontFamily: 'monospace',
-                                ),
-                          ),
-                        ),
+                        _buildControls(),
+                        const SizedBox(height: 16),
+                        SourceCodeView(sourceCode: _buildCode()),
                       ],
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

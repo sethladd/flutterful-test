@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:flutterful/features/graphics/widgets/source_code_view.dart';
 
 class GradientsExample extends StatefulWidget {
   const GradientsExample({super.key});
@@ -177,26 +178,7 @@ class _GradientsExampleState extends State<GradientsExample> {
                   },
                 ),
                 const SizedBox(height: 16),
-                FilledButton.icon(
-                  onPressed: () => setState(() => _showCode = !_showCode),
-                  icon: Icon(_showCode ? Icons.code_off : Icons.code),
-                  label: Text(_showCode ? 'Hide Code' : 'Show Code'),
-                ),
-                if (_showCode) ...[
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
-                    ),
-                    child: SelectableText(
-                      _buildCode(),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontFamily: 'monospace',
-                          ),
-                    ),
-                  ),
-                ],
+                SourceCodeView(sourceCode: _buildCode()),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterful/features/graphics/widgets/source_code_view.dart';
 
 class ShadowsExample extends StatefulWidget {
   const ShadowsExample({super.key});
@@ -14,7 +15,6 @@ class _ShadowsExampleState extends State<ShadowsExample> {
   var _spreadRadius = 0.0;
   var _color = Colors.black;
   var _opacity = 0.25;
-  var _showCode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -150,26 +150,7 @@ class _ShadowsExampleState extends State<ShadowsExample> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                FilledButton.icon(
-                  onPressed: () => setState(() => _showCode = !_showCode),
-                  icon: Icon(_showCode ? Icons.code_off : Icons.code),
-                  label: Text(_showCode ? 'Hide Code' : 'Show Code'),
-                ),
-                if (_showCode) ...[
-                  const SizedBox(height: 16),
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
-                    ),
-                    child: SelectableText(
-                      _buildCode(),
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontFamily: 'monospace',
-                          ),
-                    ),
-                  ),
-                ],
+                SourceCodeView(sourceCode: _buildCode()),
               ],
             ),
           ),
