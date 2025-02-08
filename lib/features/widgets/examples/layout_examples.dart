@@ -29,6 +29,13 @@ class _ContainerExampleState extends State<ContainerExample> {
           ),
           Padding(
             padding: const EdgeInsets.all(16),
+            child: Text(
+              'A convenience widget that combines common painting, positioning, and sizing widgets.',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -132,6 +139,13 @@ class _RowExampleState extends State<RowExample> {
                   color: Colors.blue.withOpacity(0.5),
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              'Layout a list of child widgets in the horizontal direction.',
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
           Padding(
@@ -268,6 +282,13 @@ class _ColumnExampleState extends State<ColumnExample> {
                   color: Colors.blue.withOpacity(0.5),
                 ),
               ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              'Layout a list of child widgets in the vertical direction.',
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
           ),
           Padding(
