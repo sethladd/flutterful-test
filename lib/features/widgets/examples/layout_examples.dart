@@ -158,28 +158,38 @@ class _RowExampleState extends State<RowExample> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 8),
-                SegmentedButton<MainAxisAlignment>(
-                  segments: const [
-                    ButtonSegment(
+                DropdownButtonFormField<MainAxisAlignment>(
+                  value: mainAxisAlignment,
+                  items: [
+                    DropdownMenuItem(
                       value: MainAxisAlignment.start,
-                      label: Text('Start'),
+                      child: Text('Start'),
                     ),
-                    ButtonSegment(
+                    DropdownMenuItem(
                       value: MainAxisAlignment.center,
-                      label: Text('Center'),
+                      child: Text('Center'),
                     ),
-                    ButtonSegment(
+                    DropdownMenuItem(
                       value: MainAxisAlignment.end,
-                      label: Text('End'),
+                      child: Text('End'),
                     ),
-                    ButtonSegment(
+                    DropdownMenuItem(
                       value: MainAxisAlignment.spaceBetween,
-                      label: Text('Between'),
+                      child: Text('Space Between'),
+                    ),
+                    DropdownMenuItem(
+                      value: MainAxisAlignment.spaceAround,
+                      child: Text('Space Around'),
+                    ),
+                    DropdownMenuItem(
+                      value: MainAxisAlignment.spaceEvenly,
+                      child: Text('Space Evenly'),
                     ),
                   ],
-                  selected: {mainAxisAlignment},
-                  onSelectionChanged: (selected) {
-                    setState(() => mainAxisAlignment = selected.first);
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() => mainAxisAlignment = value);
+                    }
                   },
                 ),
                 const SizedBox(height: 16),
@@ -301,28 +311,38 @@ class _ColumnExampleState extends State<ColumnExample> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 8),
-                SegmentedButton<MainAxisAlignment>(
-                  segments: const [
-                    ButtonSegment(
+                DropdownButtonFormField<MainAxisAlignment>(
+                  value: mainAxisAlignment,
+                  items: [
+                    DropdownMenuItem(
                       value: MainAxisAlignment.start,
-                      label: Text('Start'),
+                      child: Text('Start'),
                     ),
-                    ButtonSegment(
+                    DropdownMenuItem(
                       value: MainAxisAlignment.center,
-                      label: Text('Center'),
+                      child: Text('Center'),
                     ),
-                    ButtonSegment(
+                    DropdownMenuItem(
                       value: MainAxisAlignment.end,
-                      label: Text('End'),
+                      child: Text('End'),
                     ),
-                    ButtonSegment(
+                    DropdownMenuItem(
                       value: MainAxisAlignment.spaceBetween,
-                      label: Text('Between'),
+                      child: Text('Space Between'),
+                    ),
+                    DropdownMenuItem(
+                      value: MainAxisAlignment.spaceAround,
+                      child: Text('Space Around'),
+                    ),
+                    DropdownMenuItem(
+                      value: MainAxisAlignment.spaceEvenly,
+                      child: Text('Space Evenly'),
                     ),
                   ],
-                  selected: {mainAxisAlignment},
-                  onSelectionChanged: (selected) {
-                    setState(() => mainAxisAlignment = selected.first);
+                  onChanged: (value) {
+                    if (value != null) {
+                      setState(() => mainAxisAlignment = value);
+                    }
                   },
                 ),
                 const SizedBox(height: 16),
