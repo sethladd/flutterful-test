@@ -7,6 +7,7 @@ import 'package:flutterful/features/graphics/widgets/curve_graph.dart';
 import 'package:flutterful/features/graphics/widgets/canvas_example.dart';
 import 'package:flutterful/features/graphics/widgets/transformations_example.dart';
 import 'package:flutterful/features/graphics/widgets/gradients_example.dart';
+import 'package:flutterful/features/graphics/widgets/clipping_example.dart';
 
 class GraphicsScreen extends StatefulWidget {
   const GraphicsScreen({super.key});
@@ -81,7 +82,7 @@ class _GraphicsScreenState extends State<GraphicsScreen>
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Graphics & Animations'),
@@ -92,6 +93,7 @@ class _GraphicsScreenState extends State<GraphicsScreen>
               Tab(text: 'Canvas Drawing'),
               Tab(text: 'Transformations'),
               Tab(text: 'Gradients'),
+              Tab(text: 'Clipping'),
             ],
           ),
         ),
@@ -247,6 +249,8 @@ class _GraphicsScreenState extends State<GraphicsScreen>
             const TransformationsExample(),
             // Gradients Tab
             const GradientsExample(),
+            // Clipping Tab
+            const ClippingExample(),
           ],
         ),
       ),
