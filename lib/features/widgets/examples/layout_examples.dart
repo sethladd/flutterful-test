@@ -272,6 +272,7 @@ class _ColumnExampleState extends State<ColumnExample> {
           Container(
             color: Colors.blue.withOpacity(0.1),
             padding: const EdgeInsets.all(32),
+            height: 400,
             child: Column(
               mainAxisAlignment: mainAxisAlignment,
               crossAxisAlignment: crossAxisAlignment,
@@ -351,25 +352,27 @@ class _ColumnExampleState extends State<ColumnExample> {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 8),
-                SegmentedButton<CrossAxisAlignment>(
-                  segments: const [
-                    ButtonSegment(
-                      value: CrossAxisAlignment.start,
-                      label: Text('Start'),
-                    ),
-                    ButtonSegment(
-                      value: CrossAxisAlignment.center,
-                      label: Text('Center'),
-                    ),
-                    ButtonSegment(
-                      value: CrossAxisAlignment.end,
-                      label: Text('End'),
-                    ),
-                  ],
-                  selected: {crossAxisAlignment},
-                  onSelectionChanged: (selected) {
-                    setState(() => crossAxisAlignment = selected.first);
-                  },
+                Center(
+                  child: SegmentedButton<CrossAxisAlignment>(
+                    segments: const [
+                      ButtonSegment(
+                        value: CrossAxisAlignment.start,
+                        label: Text('Start'),
+                      ),
+                      ButtonSegment(
+                        value: CrossAxisAlignment.center,
+                        label: Text('Center'),
+                      ),
+                      ButtonSegment(
+                        value: CrossAxisAlignment.end,
+                        label: Text('End'),
+                      ),
+                    ],
+                    selected: {crossAxisAlignment},
+                    onSelectionChanged: (selected) {
+                      setState(() => crossAxisAlignment = selected.first);
+                    },
+                  ),
                 ),
                 const SizedBox(height: 16),
                 SourceCodeView(sourceCode: _buildCode()),
