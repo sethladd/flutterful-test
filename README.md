@@ -1,16 +1,38 @@
 # flutterful
 
-A new Flutter project.
+An experimental showcase of things Flutter can do.
 
-## Getting Started
+The dream is that this is an app which lets anyone see everything Flutter can do:
 
-This project is a starting point for a Flutter application.
+* all of the various UI controls
+* design languages
+* shapes
+* images
+* text
+* layouts
+* lists
+* structures
+* modal presentations
+* charts
+* maps
+* sign in
+* pay
+* accessibility
+* animations
+* * easing
+  * transitions
+  * content transition
+  * timing
+* colors
+* effects
+* gestures
+* gesture composition
+* haptics
+* materials (translucent effects)
+* typography
 
-A few resources to get you started if this is your first Flutter project:
+Each item should be easily discoverable, live (you can see it, touch it, etc), controllable (change
+properties in the app and see it reflected live), and abily to see a small code snippet
+for that item.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Originally created as a testbed for vibe coding (i.e., how far could I get?).
