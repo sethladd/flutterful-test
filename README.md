@@ -2,6 +2,8 @@
 
 An experimental showcase of things Flutter can do.
 
+status: experimental and in heavy development. Do not use or trust.
+
 The dream is that this is an app which lets anyone see everything Flutter can do:
 
 * all of the various UI controls
